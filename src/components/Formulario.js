@@ -1,4 +1,5 @@
 import React, {Fragment, useState} from 'react';
+import uuid from 'uuid/v4';
 
 const Formulario = () =>{
     
@@ -11,7 +12,7 @@ const Formulario = () =>{
         sintomas: ''
     });
     
-    const [error, actualizaError] = useState(false)
+    const [error, actualizarError] = useState(false)
 
     //Función que se ejecuta por cada input
     const actualizarState = e =>{
@@ -30,11 +31,15 @@ const Formulario = () =>{
         
         // Validar
         if(mascota.trim() === '' || propietario.trim() === '' || fecha.trim() === '' || hora.trim() === '' || sintomas.trim() === ''){
-			actualizaError(true);
+			actualizarError(true);
 			return; 
 		}
+		
+		// Eliminar mensaje previo
+		actualizarError(false);
 
         // Asignar un ID
+        cita.id = uuid();
 
         // Crear la cita
 
