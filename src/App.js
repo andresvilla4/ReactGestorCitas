@@ -8,12 +8,18 @@ function App() {
 	const [citas, guardarCitas] = useState([]);
 	
 	// Función que tome las citas actuales y agregue la nueva
-	const creaCita = cita => {
+	const crearCita = cita => {
 		guardarCitas([
 			...citas,
 			cita
 		]);
 		}
+		
+	// Función que elimina una cita por su IDc
+	const eliminarCita = id =>{
+		const nuevasCitas = citas.filter(cita => cita.id !== id);
+		guardarCitas(nuevasCitas);
+	}
 	
   return (
     <Fragment>
@@ -22,7 +28,7 @@ function App() {
         <div row="row">
           <div className="one-half column">
             <Formulario 
-				creaCita={crearCita}
+				crearCita={crearCita}
             />
           </div>
           <div className="one-half column">
@@ -31,6 +37,7 @@ function App() {
 					<Cita 
 						key={cita.id}
 						cita={cita}
+						eliminarCita={eliminarCita}
 					/>
 				))}
           </div>
